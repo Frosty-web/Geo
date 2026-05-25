@@ -1,0 +1,49 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header { text-align: center; margin-bottom: 30px; }
+h1 { color: #1a1a1a; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+.user-info { color: #666; font-weight: bold; margin-top: 5px; }
+.container {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.meal-card {
+    border-radius: 24px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+
+.meal-card h2 {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    text-transform: none;
+}
+.morning { background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); color: #333; }
+.day { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); color: #333; }
+.evening { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); }
+.night { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); }
+
+.time-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; opacity: 0.8; }
+h2 { margin: 10px 0; font-size: 1.4rem; }
+p { font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
+
+.img-wrapper img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin: 10px 0;
+    border: 1px solid rgba(255,255,255,0.2);
+}
