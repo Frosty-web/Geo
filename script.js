@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log("Система уведомлений активирована!");
                     checkMealTime();
                     setInterval(checkMealTime, 60000);
-                    startBtn.style.display = 'none'; // Скрываем кнопку после активации
+                    startBtn.disabled = true;
+startBtn.textContent = "Уведомления активированы";
                 } else {
                     alert("Нужно разрешить уведомления, чтобы это работало!");
                 }
