@@ -1,9 +1,3 @@
-
-// 1. Запрашиваем разрешение на уведомления при загрузке страницы
-if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
-    Notification.requestPermission();
-}
-
 // 2. Расписание приёмов пищи
 const mealSchedule = [
     { time: "08:00", title: "Завтрак", message: "Пора есть! Омлет с овощами уже ждёт." },
@@ -17,7 +11,7 @@ function sendMealNotification(title, message) {
     if (Notification.permission === 'granted') {
         new Notification(title, {
             body: message,
-            icon: 'https://cdn-icons-png.flaticon.com/512/3565/3565418.png' // Иконка тарелки с вилкой и ножом
+            icon: 'https://cdn-icons-png.flaticon.com/512/3565/3565418.png'
         });
     }
 }
@@ -26,12 +20,12 @@ function sendMealNotification(title, message) {
 function checkMealTime() {
     const now = new Date();
     
-    // Получаем часы и минуты в формате "00"
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const currentTime = `${hours}:${minutes}`;
 
-    // Ищем совпадение с расписанием
+    console.log("Проверка времени:", currentTime);
+
     const currentMeal = mealSchedule.find(meal => meal.time === currentTime);
 
     if (currentMeal) {
@@ -39,13 +33,24 @@ function checkMealTime() {
     }
 }
 
-// 5. Запуск таймера после полной загрузки страницы
+// 5. Запуск после клика пользователя (обход ошибки браузера)
 document.addEventListener('DOMContentLoaded', () => {
-    // Проверяем время сразу при загрузке
-    checkMealTime();
-
-    // Затем запускаем проверку каждую минуту (60000 мс)
-    setInterval(checkMealTime, 60000);
-
-    console.log("План питания загружен. Система уведомлений активна!");
+    const startBtn = document.getElementById('startBtn');
+    
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    console.log("Система уведомлений активирована!");
+                    checkMealTime();
+                    setInterval(checkMealTime, 60000);
+                    startBtn.style.display = 'none'; // Скрываем кнопку после активации
+                } else {
+                    alert("Нужно разрешить уведомления, чтобы это работало!");
+                }
+            });
+        });
+    } else {
+        console.error("Кнопка с id='startBtn' не найдена в HTML!");
+    }
 });
